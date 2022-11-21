@@ -5,6 +5,9 @@ from passwd import TOKEN_ID, CHANNEL_ID
 
 DOG_API = "https://dog.ceo/api/breeds/image/random"
 CAT_API = "https://api.thecatapi.com/v1/images/search"
+woofs = ["わん", "わふ", "わう", "わんわん"]
+meows = ["にゃん", "にゃー", "みゃお", "にゃーん", "はにゃ？"]
+
 
 client = discord.Client(intents=discord.Intents.all())
 
@@ -36,12 +39,12 @@ async def on_message(message):
 	if message.author.bot:
 		return
 	channel = client.get_channel(CHANNEL_ID)
-	if message.content == "にゃん":
+	if message.content in meows:
 		image_url = get_cat_image()
 		save_image(image_url)
 		file = discord.File("image.png", filename="cat.png")
 		await message.channel.send(file=file)
-	elif message.content == "わふ":
+	elif message.content in woofs:
 		image_url = get_dog_image()
 		save_image(image_url)
 		file = discord.File("image.png", filename="dog.png")
